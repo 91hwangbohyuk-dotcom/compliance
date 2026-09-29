@@ -1,0 +1,168 @@
+/*
+  style.css — 화면 디자인 (3단계)
+  app.py가 시작할 때 이 파일을 읽어 적용한다.
+  색상은 모두 이 파일에서 관리한다.
+    - 중요도 배지(채운 모양): .badge-High / .badge-Medium / .badge-Low
+    - 카테고리 칩(테두리 모양): .chip-POLICY / .chip-SANCTION / .chip-COURT / .chip-CORPORATE / .chip-GLOBAL
+*/
+
+:root {
+  --navy: #1F3A5F;
+  --text: #1F2937;
+  --muted: #667085;
+  --line: #E4E7EC;
+  --card: #FFFFFF;
+}
+
+/* ── 기본 레이아웃 ─────────────────────────────── */
+/* 글꼴은 앱 최상위에만 지정해 자식이 물려받게 한다. (아이콘 글꼴을 덮어쓰지 않도록 넓은 선택자는 쓰지 않음) */
+.stApp {
+  font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", -apple-system, sans-serif;
+}
+.block-container { padding-top: 3.4rem; padding-bottom: 3rem; max-width: 1280px; }  /* 상단 바에 헤더가 가리지 않게 */
+[data-testid="stSidebarUserContent"] { padding-top: 0.5rem; }
+[data-testid="stDecoration"], .stAppDeployButton { display: none; }  /* 상단 장식선·Deploy 버튼 숨김 */
+
+/* ── 사이드바 ─────────────────────────────────── */
+[data-testid="stSidebar"] { border-right: 1px solid var(--line); }
+.side-brand { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+.side-brand-sub { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+.side-step {
+  font-size: 13px; font-weight: 700; color: var(--navy);
+  margin: 18px 0 6px; padding-top: 12px; border-top: 1px solid var(--line);
+}
+/* 필터 버튼(pills): 선택됨 = 남색 채움, 해제됨 = 흰 배경 + 남색 테두리 */
+[data-testid="stSidebar"] button[data-variant="pills"][aria-pressed="true"] {
+  background: var(--navy); border-color: var(--navy); color: #fff;
+}
+[data-testid="stSidebar"] button[data-variant="pills"][aria-pressed="true"]:hover {
+  background: #2C4F7C; border-color: #2C4F7C; color: #fff;
+}
+[data-testid="stSidebar"] button[data-variant="pills"][aria-pressed="false"] {
+  background: #fff; color: var(--navy); border: 1px solid var(--navy);
+}
+[data-testid="stSidebar"] button[data-variant="pills"][aria-pressed="false"]:hover {
+  background: #F0F4FA;
+}
+.side-step span {
+  display: inline-block; width: 20px; height: 20px; line-height: 20px; border-radius: 50%;
+  background: var(--navy); color: #fff; text-align: center; font-size: 12px; margin-right: 6px;
+}
+
+/* ── 헤더 ─────────────────────────────────────── */
+.app-header {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px;
+  background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--navy);
+  border-radius: 10px; padding: 18px 22px; margin-bottom: 14px;
+}
+.app-title { font-size: 26px; font-weight: 800; color: var(--navy); letter-spacing: -0.3px; }
+.app-subtitle { font-size: 13px; color: var(--muted); margin-top: 2px; }
+.app-meta { font-size: 12.5px; color: var(--muted); text-align: right; line-height: 1.7; }
+.app-meta b { color: var(--text); }
+
+/* ── 요약 지표(KPI) ────────────────────────────── */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 16px; }
+.kpi {
+  background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px;
+}
+.kpi-label { font-size: 12px; color: var(--muted); }
+.kpi-value { font-size: 24px; font-weight: 700; color: var(--text); margin-top: 2px; }
+.kpi-value.small { font-size: 15px; font-weight: 600; padding-top: 6px; }
+.kpi-High { border-top: 3px solid #B42318; }
+.kpi-Medium { border-top: 3px solid #DC6803; }
+.kpi-Low { border-top: 3px solid #98A2B3; }
+
+/* ── 배지·칩 ──────────────────────────────────── */
+.badge {
+  display: inline-block; font-size: 11.5px; font-weight: 700; padding: 2px 8px;
+  border-radius: 4px; white-space: nowrap; vertical-align: middle;
+}
+.badge-High { background: #FEE4E2; color: #B42318; }
+.badge-Medium { background: #FEF0C7; color: #B54708; }
+.badge-Low { background: #F2F4F7; color: #475467; }
+.chip {
+  display: inline-block; font-size: 11.5px; font-weight: 600; padding: 1px 8px;
+  border-radius: 999px; border: 1px solid; background: #fff; white-space: nowrap; vertical-align: middle;
+}
+.chip-POLICY { color: #2F5AA8; border-color: #9DB5E0; }
+.chip-SANCTION { color: #9A3412; border-color: #E8B59A; }
+.chip-COURT { color: #0F766E; border-color: #8FCFC7; }
+.chip-CORPORATE { color: #5B4A2E; border-color: #CBBF9F; }
+.chip-GLOBAL { color: #3F6212; border-color: #A9C98A; }
+
+/* ── 섹션 제목 ────────────────────────────────── */
+.section-title { font-size: 17px; font-weight: 700; color: var(--text); margin: 6px 0 2px; }
+.section-desc { font-size: 12.5px; color: var(--muted); margin-bottom: 8px; }
+
+/* ── Must-Read Top 5 ──────────────────────────── */
+.top5 {
+  background: var(--card); border: 1px solid #C9D3E3; border-top: 4px solid var(--navy);
+  border-radius: 10px; padding: 14px 18px 8px; margin-bottom: 18px;
+}
+.top5-row {
+  display: grid; grid-template-columns: 30px 1fr; gap: 10px; align-items: start;
+  padding: 10px 0; border-bottom: 1px solid #F0F2F5;
+}
+.top5-row:last-child { border-bottom: none; }
+.top5-rank {
+  width: 26px; height: 26px; line-height: 26px; border-radius: 6px; text-align: center;
+  background: var(--navy); color: #fff; font-weight: 700; font-size: 13px;
+}
+.top5-title a { font-size: 15px; font-weight: 600; color: var(--text); text-decoration: none; }
+.top5-title a:hover { color: var(--navy); text-decoration: underline; }
+.top5-meta { font-size: 12px; color: var(--muted); margin-top: 3px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+
+/* ── 이슈 카드 ────────────────────────────────── */
+.issue-card {
+  background: var(--card); border: 1px solid var(--line); border-left: 4px solid #D0D5DD;
+  border-radius: 10px; padding: 16px 20px; margin-bottom: 12px;
+}
+.issue-card.imp-High { border-left-color: #B42318; }
+.issue-card.imp-Medium { border-left-color: #F79009; }
+.issue-title { font-size: 17px; font-weight: 700; color: var(--text); line-height: 1.45; }
+.issue-meta { display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; font-size: 12.5px; color: var(--muted); margin: 6px 0 4px; }
+.issue-reason { font-size: 12.5px; color: var(--muted); margin-bottom: 8px; }
+.issue-failed { font-size: 13px; color: #B42318; background: #FEF3F2; border-radius: 6px; padding: 6px 10px; margin: 6px 0; }
+.label { font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: 0.2px; margin: 10px 0 4px; }
+.key-points { margin: 0 0 4px 0; padding-left: 18px; font-size: 14px; line-height: 1.65; color: var(--text); }
+.key-points li { margin-bottom: 2px; }
+
+/* 준법 Check Point: 요약과 구분되는 "해야 할 일" 상자 */
+.checkpoints {
+  background: #EEF4FF; border: 1px solid #C7D7FE; border-radius: 8px; padding: 10px 14px; margin: 10px 0 6px;
+}
+.checkpoints .label { color: var(--navy); margin-top: 0; }
+.checkpoints ul { list-style: none; margin: 0; padding: 0; }
+.checkpoints li { position: relative; padding-left: 24px; font-size: 14px; line-height: 1.6; margin-bottom: 4px; color: #1D2939; }
+.checkpoints li::before {
+  content: "✓"; position: absolute; left: 0; top: 2px; width: 16px; height: 16px; line-height: 16px;
+  font-size: 11px; font-weight: 700; text-align: center; color: #fff; background: var(--navy); border-radius: 3px;
+}
+
+/* 출처·원문 링크 */
+.issue-links { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: flex-start; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--line); font-size: 13px; }
+.source-link {
+  display: inline-block; font-weight: 600; color: var(--navy) !important; text-decoration: none;
+  border: 1px solid #C9D3E3; border-radius: 6px; padding: 3px 10px;
+}
+.source-link:hover { background: #F0F4FA; }
+.related summary { cursor: pointer; color: var(--muted); padding-top: 4px; }  /* 원문 보기 버튼과 높이 맞춤 */
+.related ul { margin: 6px 0 0; padding-left: 18px; font-size: 13px; line-height: 1.6; }
+.related a { color: var(--navy); }
+
+/* 긴 제목·긴 문장·긴 URL이 레이아웃을 넘지 않도록 */
+.issue-title, .top5-title, .key-points li, .checkpoints li, .related li {
+  word-break: keep-all; overflow-wrap: anywhere;
+}
+
+/* ── 안내 상자 ────────────────────────────────── */
+.empty-state { background: var(--card); border: 1px dashed #C9D3E3; border-radius: 10px; padding: 22px 24px; color: var(--text); }
+.empty-state ol { margin: 8px 0 0; padding-left: 20px; line-height: 1.9; font-size: 14px; }
+.footer-note { font-size: 12px; color: var(--muted); text-align: center; margin-top: 18px; }
+
+/* ── 좁은 화면 ────────────────────────────────── */
+@media (max-width: 800px) {
+  .app-title { font-size: 21px; }
+  .app-meta { text-align: left; }
+  .issue-card { padding: 14px; }
+}

@@ -1,0 +1,7 @@
+streamlit
+requests
+beautifulsoup4
+python-dotenv
+# LLM SDK: 사용하는 제공사 것만 있어도 동작한다 (mock은 둘 다 필요 없음)
+openai
+anthropic

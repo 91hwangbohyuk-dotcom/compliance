@@ -1,0 +1,9 @@
+# Streamlit 기본 테마 (3단계 UI 디자인)
+# 세부 스타일은 프로젝트 폴더의 style.css에 있다.
+[theme]
+base = "light"
+primaryColor = "#1F3A5F"              # 버튼·선택 강조색 (남색)
+backgroundColor = "#F4F6F9"           # 본문 배경 (연회색)
+secondaryBackgroundColor = "#FFFFFF"  # 사이드바·입력창 배경
+textColor = "#1F2937"
+font = "sans serif"
